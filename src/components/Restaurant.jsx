@@ -15,12 +15,22 @@ function Restaurant(props) {
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const [open, setOpen] = useState(false);
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const openTimes = props.restaurant.open_times ?? [];
 
   // function to call function in app.jsx to delete a restaurant
-  function deleteResto(e) {
+  function handleDeleteClick(e) {
     e.stopPropagation();
+    setOpenDeleteDialog(true);
+  }
+  
+  function confirmDelete() {
     props.onDelete(props.id);
+    setOpenDeleteDialog(false);
+  }
+  
+  function cancelDelete() {
+    setOpenDeleteDialog(false);
   }
 
   // function to open dialog info
@@ -90,7 +100,7 @@ function Restaurant(props) {
                 variant="contained"
                 color="secondary"
                 size="small"
-                onClick={deleteResto}
+                onClick={handleDeleteClick}
               >
                 <DeleteIcon />
               </IconButton>
@@ -141,6 +151,30 @@ function Restaurant(props) {
           )}
 
           <OpenTimesList openTimes={openTimes} days={days} formatTime={formatTime} />
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={openDeleteDialog}
+        onClose={cancelDelete}
+        maxWidth="xs"
+        fullWidth
+      >
+        <DialogTitle>Confirm Delete</DialogTitle>
+        <DialogContent dividers>
+          <Typography>
+            Are you sure you want to delete <strong>{props.restaurant.name}</strong>?
+          </Typography>
+
+          <div className="delete-button">
+            <IconButton onClick={cancelDelete}>
+              <CloseIcon />
+            </IconButton>
+
+            <IconButton color="secondary" onClick={confirmDelete}>
+              <DeleteIcon />
+            </IconButton>
+          </div>
         </DialogContent>
       </Dialog>
     </>

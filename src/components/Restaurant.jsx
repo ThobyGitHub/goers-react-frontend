@@ -3,7 +3,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import BusinessIcon from '@material-ui/icons/Business';
 import Dialog from "@material-ui/core/Dialog";
+import Typography from "@material-ui/core/Typography";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import UpdateArea from "./UpdateArea";
@@ -49,11 +51,11 @@ function Restaurant(props) {
         <ul>
           {openTimes.map((ot) => (
             <li key={ot.id}>
-              {ot.day_start === ot.day_end
-                ? days[ot.day_start - 1]
-                : days[ot.day_start - 1] + " to " + days[ot.day_end - 1]}
-              {" "}
-              {formatTime(ot.time_start)} - {formatTime(ot.time_end)}
+              <strong>
+                {ot.day_start === ot.day_end
+                  ? days[ot.day_start - 1]
+                  : days[ot.day_start - 1] + " to " + days[ot.day_end - 1]}
+              </strong>: {formatTime(ot.time_start)} - {formatTime(ot.time_end)}
             </li>
           ))}
         </ul>
@@ -65,8 +67,9 @@ function Restaurant(props) {
     <>
       {/* Card */}
       <div className="restaurant-card" onClick={openDialogInfo} style={{ cursor: "pointer" }}>
-        <div className="card-header" onClick={(e) => e.stopPropagation()}>
-          <h2>{props.restaurant.name}</h2>
+        <div className="card-header" onClick={(e) => e.stopPropagation()} style={{ alignItems: "center", gap: "8px" }}>
+          <BusinessIcon color="primary" style={{ fontSize: 28 }} />
+          <h2 style={{ flexGrow: 1 }}>{props.restaurant.name}</h2>
 
           {props.isUserAdmin && (
             <div className="action-buttons">
@@ -113,28 +116,31 @@ function Restaurant(props) {
       {/* Dialog */}
       <Dialog open={open} onClose={closeDialogInfo} maxWidth="sm" fullWidth>
         <DialogTitle>
-          {props.restaurant.name}
-          <IconButton
-            aria-label="close"
-            onClick={closeDialogInfo}
-            style={{ position: "absolute", right: 8, top: 8 }}
-          >
+          <BusinessIcon color="primary" style={{ fontSize: 28, paddingTop:5 }} />
+            {props.restaurant.name}
+          <IconButton aria-label="close" onClick={closeDialogInfo} style={{position: "absolute", right:8, top:8}}>
             <CloseIcon />
           </IconButton>
         </DialogTitle>
 
         <DialogContent dividers>
-          {props.restaurant.address && <p><strong>Address:</strong> {props.restaurant.address}</p>}
-          {props.restaurant.phone_number && <p><strong>Phone:</strong> {props.restaurant.phone_number}</p>}
-          {props.restaurant.note && <p><strong>Note:</strong> {props.restaurant.note}</p>}
+          {props.restaurant.address && (
+            <Typography variant="body1" gutterBottom>
+              <strong>Address:</strong> {props.restaurant.address}
+            </Typography>
+          )}
+          {props.restaurant.phone_number && (
+            <Typography variant="body1" gutterBottom>
+              <strong>Phone:</strong> {props.restaurant.phone_number}
+            </Typography>
+          )}
+          {props.restaurant.note && (
+            <Typography variant="body1" gutterBottom>
+              <strong>Note:</strong> {props.restaurant.note}
+            </Typography>
+          )}
 
-          <div className="card-body">
-            <OpenTimesList
-              openTimes={openTimes}
-              days={days}
-              formatTime={formatTime}
-            />
-          </div>
+          <OpenTimesList openTimes={openTimes} days={days} formatTime={formatTime} />
         </DialogContent>
       </Dialog>
     </>

@@ -65,6 +65,17 @@ Restoranku is simple react app project. This project is to fullfill the assignme
 
 Visit `http://localhost:3000` in your browser to access the web-based app.
 
+### Known Issues
+
+1. error due to old version of react-scripts (create react app) dependency
+   Error: error:0308010C:digital envelope routines::unsupported
+   run:
+
+   ```bash
+   export NODE_OPTIONS=--openssl-legacy-provider
+   npm start
+   ```
+
 ### To do
 
 (soon)

@@ -23,6 +23,7 @@ function FilterArea(props) {
   // function to close form
   function closeForm() {
     setFilters({ name: "", day: "", time: "" });
+    props.onFilter({ name: "", day: "", time: "" });
     setExpanded(false);
   }
 

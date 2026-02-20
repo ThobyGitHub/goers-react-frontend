@@ -46,7 +46,7 @@ function Header({ userLogin, onLogin, onLogout, isUserAdmin }) {
               <>
                 <Button
                   variant="contained"
-                  color="warning"
+                  color="default"
                   startIcon={<ContactMailIcon />}
                   size="small"
                   onClick={() => setOpenRegisterAdminDialog(true)}

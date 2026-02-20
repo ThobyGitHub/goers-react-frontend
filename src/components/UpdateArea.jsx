@@ -28,8 +28,10 @@ function UpdateArea(props) {
 
   // Fetch restaurant data from props when this page load
   useEffect(() => {
-    setRestaurant(props.restaurant)
-  }, []);
+    if(props.restaurant){
+      setRestaurant(props.restaurant)
+    }
+  }, [props.restaurant]);
 
   // function to sync state value of restaurant
   function handleChange(event) {

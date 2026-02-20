@@ -71,6 +71,11 @@ function App() {
         setUserLogin(null);
       });
     } catch (error) {
+      if (error.response?.status === 401) {
+        // Token expired or invalid
+        localStorage.removeItem("token");
+        setUserLogin(null);
+      }
       console.error("Error fetch user login", error);
     }
   }
@@ -178,20 +183,37 @@ function App() {
 
       {/* filter section */}
       <FilterArea onFilter={fetchRestaurants} />
-      <div className="restaurant-list">
-        {restaurants.map((resto, index) => {
-          return (
-            <Restaurant
-              key={index}
-              id={resto.id}
-              restaurant={resto}
-              onDelete={deleteResto}
-              isUserAdmin={isUserAdmin()}
-              onUpdate={updateResto}
-            />
-          );
-        })}
-      </div>
+      
+        {restaurants.length === 0 ? (
+          <div
+            className="no-restaurant-found"
+          >
+            <div>
+              <div className="no-restaurant-icon">
+                <span role="img" aria-label="restaurant">
+                  🍽️
+                </span>
+              </div>
+              <p className="no-restaurant-text">
+                No restaurants found.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="restaurant-list">
+            {restaurants.map((resto) => (
+                <Restaurant
+                  key={resto.id}
+                  id={resto.id}
+                  restaurant={resto}
+                  onDelete={deleteResto}
+                  isUserAdmin={isUserAdmin()}
+                  onUpdate={updateResto}
+                />
+              ))
+            }
+          </div>
+        )}
 
       <Footer />
     </div>

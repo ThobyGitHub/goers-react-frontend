@@ -98,17 +98,18 @@ footer p {
 }
 
 .restaurant-card {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: linear-gradient(135deg, #fff, #f9f9f9);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   padding: 16px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .restaurant-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .restaurant-card button {
@@ -150,8 +151,13 @@ footer p {
 }
 
 .open-times li {
-  list-style-type: disc;
-  font-size: 0.9rem;
+  display: inline-block;
+  background: #fef3c7;
+  color: #92400e; 
+  margin: 4px 4px 4px 0;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  border-radius: 12px;
 }
 
 form.create-restaurant {

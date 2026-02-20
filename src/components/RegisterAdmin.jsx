@@ -38,13 +38,13 @@ function RegisterAdmin(props) {
     try {
 
       // call RegisterAdmin
-      const response = await axios.post(
+      await axios.post(
         `${process.env.REACT_APP_BASE_API_URL}/register`,
         { name: formRegisterAdmin.name, email: formRegisterAdmin.email, password: formRegisterAdmin.password, password_confirmation: formRegisterAdmin.password_confirmation },
       );
 
-      localStorage.setItem("token", response.data.token);
       alert("admin has been added, you can try login later.")
+      // localStorage.setItem("token", response.data.token);
       // props.onRegisterAdmin(response.data);
 
       // clear form
@@ -74,7 +74,7 @@ function RegisterAdmin(props) {
         <IconButton
           aria-label="close"
           onClick={props.onClose}
-          style={{ position: "absolute", right: 8, top: 8 }}
+          className="close-button"
         >
           <CloseIcon />
         </IconButton>
@@ -82,17 +82,11 @@ function RegisterAdmin(props) {
 
       <DialogContent dividers>
         {errorMessage && (
-          <div style={{
-            backgroundColor: "#fdecea",
-            color: "#b71c1c",
-            padding: "10px",
-            borderRadius: "4px",
-            marginBottom: "16px"
-          }}>
+          <div className="error-box">
             {errorMessage}
           </div>
         )}
-        <form onSubmit={submitRegisterAdmin} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <form onSubmit={submitRegisterAdmin} className="register-form">
           <TextField
             label="name"
             name="name"

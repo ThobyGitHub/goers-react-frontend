@@ -69,7 +69,7 @@ function Login(props) {
         <IconButton
           aria-label="close"
           onClick={props.onClose}
-          style={{ position: "absolute", right: 8, top: 8 }}
+          className="close-button"
         >
           <CloseIcon />
         </IconButton>
@@ -77,17 +77,11 @@ function Login(props) {
 
       <DialogContent dividers>
         {errorMessage && (
-          <div style={{
-            backgroundColor: "#fdecea",
-            color: "#b71c1c",
-            padding: "10px",
-            borderRadius: "4px",
-            marginBottom: "16px"
-          }}>
+          <div className="error-box">
             {errorMessage}
           </div>
         )}
-        <form onSubmit={submitLogin} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <form onSubmit={submitLogin} className="login-form">
           <TextField
             label="email"
             name="email"

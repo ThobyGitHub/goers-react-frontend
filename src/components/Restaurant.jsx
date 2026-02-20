@@ -76,10 +76,10 @@ function Restaurant(props) {
   return (
     <>
       {/* Card */}
-      <div className="restaurant-card" onClick={openDialogInfo} style={{ cursor: "pointer" }}>
-        <div className="card-header" onClick={(e) => e.stopPropagation()} style={{ alignItems: "center", gap: "8px" }}>
-          <BusinessIcon color="primary" style={{ fontSize: 28 }} />
-          <h2 style={{ flexGrow: 1 }}>{props.restaurant.name}</h2>
+      <div className="restaurant-card" onClick={openDialogInfo}>
+        <div className="card-header" onClick={(e) => e.stopPropagation()}>
+          <BusinessIcon color="primary" className="icon-title" />
+          <h2>{props.restaurant.name}</h2>
 
           {props.isUserAdmin && (
             <div className="action-buttons">
@@ -126,9 +126,9 @@ function Restaurant(props) {
       {/* Dialog */}
       <Dialog open={open} onClose={closeDialogInfo} maxWidth="sm" fullWidth>
         <DialogTitle>
-          <BusinessIcon color="primary" style={{ fontSize: 28, paddingTop:5 }} />
+          <BusinessIcon color="primary" className="icon-title" style={{ paddingTop:5 }} />
             {props.restaurant.name}
-          <IconButton aria-label="close" onClick={closeDialogInfo} style={{position: "absolute", right:8, top:8}}>
+          <IconButton aria-label="close" onClick={closeDialogInfo} className="close-button">
             <CloseIcon />
           </IconButton>
         </DialogTitle>

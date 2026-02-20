@@ -100,14 +100,14 @@ function CreateArea(props) {
         <IconButton
           aria-label="close"
           onClick={props.onClose}
-          style={{ position: "absolute", right: 8, top: 8 }}
+          className="close-button"
         >
           <CloseIcon />
         </IconButton>
       </DialogTitle>
 
       <DialogContent dividers>
-        <form onSubmit={submitRestaurant} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <form onSubmit={submitRestaurant} className="create-restaurant">
           <TextField
             label="Name"
             name="name"
@@ -138,12 +138,7 @@ function CreateArea(props) {
           <h4>Open Hours</h4>
 
           {restaurant.open_times.map((openTime, index) => (
-            <div key={index} style={{ 
-              display: "grid", 
-              gridTemplateColumns: "1fr 1fr 1fr 1fr auto",
-              gap: "10px",
-              alignItems: "center"
-            }}>
+            <div key={index} className="open-times-input">
               
               {/* <TextField
                 label="Day Start"
@@ -152,7 +147,7 @@ function CreateArea(props) {
                 onChange={(e) => handleOpenTimeChange(index, e)}
               /> */}
               <select name="day_start" onChange={(e) => handleOpenTimeChange(index, e)} value={openTime.day_start}>
-                <option value="0">Select Day</option>
+                <option value="">Select Day</option>
                 <option value="1">Monday</option>
                 <option value="2">Tuesday</option>
                 <option value="3">Wednesday</option>
@@ -169,7 +164,7 @@ function CreateArea(props) {
                 onChange={(e) => handleOpenTimeChange(index, e)}
               /> */}
               <select name="day_end" onChange={(e) => handleOpenTimeChange(index, e)} value={openTime.day_end}>
-                <option value="0">Select Day</option>
+                <option value="">Select Day</option>
                 <option value="1">Monday</option>
                 <option value="2">Tuesday</option>
                 <option value="3">Wednesday</option>

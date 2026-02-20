@@ -35,18 +35,14 @@ function FilterArea(props) {
 
   return (
     <div>
-      <form className="create-restaurant" onSubmit={submitFilter} style={{ position: "relative" }}>
+      <form className="filter-restaurant" onSubmit={submitFilter}>
         
         {/* Close Button */}
         {isExpanded && (
           <IconButton
             size="small"
             onClick={closeForm}
-            style={{
-              position: "absolute",
-              top: 5,
-              right: 5
-            }}
+            className="close-button"
           >
             <CloseIcon fontSize="small" />
           </IconButton>
@@ -83,7 +79,7 @@ function FilterArea(props) {
         )}
 
         <Zoom in={isExpanded}>
-          <Fab type="submit" color="primary" style={{ marginLeft: 8 }}>
+          <Fab type="submit" color="primary" className="search-button">
             <SearchIcon />
           </Fab>
         </Zoom>
